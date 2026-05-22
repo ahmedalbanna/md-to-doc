@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: md-to-docx
+Version: 1.0.0
+Summary: Markdown to DOCX converter with full RTL/LTR support, Arabic/English fonts, and high-precision formatting
+Author-email: md-to-docx <dev@example.com>
+License: MIT
+Keywords: markdown,docx,converter,arabic,rtl,plantuml,mermaid
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.109.0
+Requires-Dist: uvicorn[standard]>=0.27.0
+Requires-Dist: python-docx>=1.1.0
+Requires-Dist: markdown-it-py>=3.0.0
+Requires-Dist: mdit-py-plugins>=0.4.0
+Requires-Dist: click>=8.1.0
+Requires-Dist: python-multipart>=0.0.6
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: Pillow>=10.0.0
+Requires-Dist: lxml>=4.9.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: jinja2>=3.1.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: httpx>=0.25.0; extra == "dev"

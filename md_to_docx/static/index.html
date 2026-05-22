@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD → DOCX Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MD → DOCX</h1>
+            <p class="subtitle">Markdown to Word Document Converter</p>
+            <p class="subtitle-ar">محول ماركداون إلى وورد بدقة عالية</p>
+        </header>
+
+        <div class="card input-section">
+            <div class="input-tabs">
+                <button class="tab-btn active" data-tab="upload" onclick="switchTab('upload')">📄 رفع ملف</button>
+                <button class="tab-btn" data-tab="paste" onclick="switchTab('paste')">⌨️ لصق نص</button>
+            </div>
+
+            <div id="upload-tab" class="tab-content active">
+                <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                    <div class="drop-zone-content">
+                        <div class="drop-icon">📄</div>
+                        <p>اسحب ملف Markdown هنا أو اضغط للاختيار</p>
+                        <p class="drop-hint">.md, .markdown</p>
+                    </div>
+                    <input type="file" id="fileInput" accept=".md,.markdown" hidden onchange="handleFileSelect(event)">
+                </div>
+                <div id="fileName" class="file-name" hidden></div>
+            </div>
+
+            <div id="paste-tab" class="tab-content">
+                <textarea id="markdownInput" class="markdown-textarea" placeholder="الصق نص Markdown هنا...&#10;&#10;# عنوان&#10;نص عادي مع **غامق** و*مائل*"></textarea>
+            </div>
+        </div>
+
+        <div class="card options-section">
+            <h2 class="section-title">⚙️ خيارات التنسيق</h2>
+
+            <div class="options-grid">
+                <div class="option-group">
+                    <label>الاتجاه</label>
+                    <select id="dirSelect">
+                        <option value="rtl">من اليمين لليسار (RTL)</option>
+                        <option value="ltr">من اليسار لليمين (LTR)</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>نمط الغلاف</label>
+                    <select id="coverStyle">
+                        <option value="classic">كلاسيكي</option>
+                        <option value="modern">حديث</option>
+                        <option value="minimal">بسيط</option>
+                        <option value="elegant">أنيق</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>الخط العربي</label>
+                    <select id="fontArabic">
+                        <option value="Amiri">Amiri</option>
+                        <option value="Traditional Arabic">Traditional Arabic</option>
+                        <option value="Scheherazade New">Scheherazade New</option>
+                        <option value="Noto Naskh Arabic">Noto Naskh Arabic</option>
+                        <option value="Lateef">Lateef</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>الخط اللاتيني</label>
+                    <select id="fontLatin">
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Calibri">Calibri</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Georgia">Georgia</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>ترقيم الصفحات</label>
+                    <select id="pageNumberFormat">
+                        <option value="arabic-indic">أرقام عربية (١, ٢, ٣)</option>
+                        <option value="western">أرقام لاتينية (1, 2, 3)</option>
+                        <option value="roman">روماني (i, ii, iii)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="options-grid toggles">
+                <label class="toggle">
+                    <input type="checkbox" id="headingNumbering" checked>
+                    <span class="toggle-label">ترقيم العناوين</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" id="tocCheck" checked>
+                    <span class="toggle-label">جدول المحتويات</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" id="lofCheck" checked>
+                    <span class="toggle-label">قائمة الأشكال</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" id="lotCheck" checked>
+                    <span class="toggle-label">قائمة الجداول</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" id="diagramsCheck" checked>
+                    <span class="toggle-label">تحويل PlantUML/Mermaid</span>
+                </label>
+            </div>
+
+            <div class="metadata-section">
+                <h3>📖 بيانات الغلاف</h3>
+                <div class="options-grid">
+                    <div class="option-group">
+                        <label>العنوان</label>
+                        <input type="text" id="coverTitle" placeholder="عنوان المستند">
+                    </div>
+                    <div class="option-group">
+                        <label>المؤلف</label>
+                        <input type="text" id="coverAuthor" placeholder="اسم المؤلف">
+                    </div>
+                    <div class="option-group">
+                        <label>التاريخ</label>
+                        <input type="text" id="coverDate" placeholder="2024-01-15">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="convert-btn" id="convertBtn" onclick="convert()">
+            <span class="btn-icon">🔄</span>
+            <span class="btn-text">تحويل وتحميل</span>
+            <span class="btn-loader" hidden></span>
+        </button>
+
+        <div id="status" class="status" hidden></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+[console_scripts]
+md-to-docx = md_to_docx.main:cli
